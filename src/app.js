@@ -12,10 +12,16 @@ connectDB();
 
 const app = express();
 
+// app.use(cors({
+//   origin: "http://localhost:4200",  // Angular frontend
+//   credentials: true                 // allow cookies
+// }));
+
 app.use(cors({
-  origin: "http://localhost:4200",  // Angular frontend
+  origin: "https://teknotuf-1.onrender.com",  // Angular frontend
   credentials: true                 // allow cookies
 }));
+
 app.use(express.json());  // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for form-data
 // Middlewares
