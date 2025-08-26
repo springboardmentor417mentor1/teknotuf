@@ -17,10 +17,27 @@ const app = express();
 //   credentials: true                 // allow cookies
 // }));
 
+// app.use(cors({
+//   origin: "https://teknotuf-1.onrender.com",  // Angular frontend
+//   credentials: true                 // allow cookies
+// }));
+
+const allowedOrigins = [
+  'http://localhost:4200',          // Angular dev server
+  'https://teknotuf-1.onrender.com' // deployed frontend
+];
+
 app.use(cors({
-  origin: "https://teknotuf-1.onrender.com",  // Angular frontend
-  credentials: true                 // allow cookies
+  origin: function(origin, callback) {
+    if(!origin) return callback(null, true); // allow Postman/curl
+    if(!allowedOrigins.includes(origin)) {
+      return callback(new Error('CORS not allowed'), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
 }));
+
 
 app.use(express.json());  // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for form-data
