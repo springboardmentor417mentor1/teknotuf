@@ -13,15 +13,28 @@ connectDB();
 const app = express();
 
 // Allowed frontend URLs
+// const allowedOrigins = [
+//   'http://localhost:4200',
+//   'https://teknotuf-1.onrender.com'
+// ];
+
+// app.use(cors({
+//   origin: allowedOrigins,
+//   credentials: true
+// }));
 const allowedOrigins = [
   'http://localhost:4200',
-  'https://teknotuf-1.onrender.com'
+  'https://teknotuf-1.onrender.com',         // backend
+  'https://cool-maamoul-daa8f4.netlify.app'  // frontend
 ];
 
 app.use(cors({
   origin: allowedOrigins,
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
